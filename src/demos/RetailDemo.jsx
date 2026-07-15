@@ -1,4 +1,7 @@
 import { ShoppingBasket, Truck, Clock, MapPin, Leaf, Tag } from "lucide-react"
+import storefrontImg from "../assets/demos/retail-storefront.png"
+import basketImg from "../assets/demos/retail-basket.png"
+import shelvesImg from "../assets/demos/retail-shelves.png"
 
 const nav = [
   { l: "Shop", h: "#shop" },
@@ -61,12 +64,14 @@ export default function RetailDemo() {
               <span className="flex items-center gap-2"><Clock className="h-4 w-4" style={{ color: "#16a34a" }} /> Same-day drop-off</span>
             </div>
           </div>
-          <div className="aspect-square rounded-3xl" style={{ background: "linear-gradient(135deg,#16a34a,#15803d)" }}>
-            <div className="flex h-full flex-col items-center justify-center gap-3 text-center text-white">
-              <ShoppingBasket className="h-16 w-16" />
-              <p className="text-2xl font-bold">300+ daily essentials</p>
-              <p className="text-white/85">Fresh stock every morning</p>
-            </div>
+          <div className="relative">
+            <div className="absolute -inset-3 -z-10 rounded-[2rem] opacity-40 blur-2xl" style={{ background: "linear-gradient(135deg,#16a34a,#15803d)" }} />
+            <img
+              src={storefrontImg}
+              alt="Kirana Fresh storefront with fresh produce"
+              className="aspect-[4/3] w-full rounded-3xl border border-[#dcefe2] object-cover shadow-xl"
+              loading="eager"
+            />
           </div>
         </div>
       </section>
@@ -87,6 +92,28 @@ export default function RetailDemo() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Fresh today feature band */}
+      <section className="mx-auto max-w-5xl px-5 pb-4">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="group relative overflow-hidden rounded-3xl border border-[#dcefe2]">
+            <img src={basketImg} alt="Fresh vegetables" className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
+            <div className="absolute bottom-0 p-5">
+              <h3 className="text-xl font-bold text-white">Farm-fresh vegetables</h3>
+              <p className="text-sm text-white/85">Hand-picked and stocked every morning</p>
+            </div>
+          </div>
+          <div className="group relative overflow-hidden rounded-3xl border border-[#dcefe2]">
+            <img src={shelvesImg} alt="Grocery pantry shelves" className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
+            <div className="absolute bottom-0 p-5">
+              <h3 className="text-xl font-bold text-white">All your pantry staples</h3>
+              <p className="text-sm text-white/85">Rice, flour, oil and daily essentials</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -111,8 +138,9 @@ export default function RetailDemo() {
 
       {/* About */}
       <section id="about" className="bg-[#f3fbf6] py-16">
-        <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-3">
-          <div className="sm:col-span-2">
+        <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-2 sm:items-center">
+          <img src={storefrontImg} alt="Kirana Fresh store" className="aspect-[4/3] w-full rounded-3xl border border-[#dcefe2] object-cover" loading="lazy" />
+          <div>
             <h2 className="text-3xl font-extrabold">Serving the neighbourhood since 2009</h2>
             <p className="mt-4 text-[#4c6b57]">
               Kirana Fresh is a family-run store built on trust. We hand-pick fresh produce daily and
@@ -121,14 +149,14 @@ export default function RetailDemo() {
             <p className="mt-3 text-[#4c6b57]">
               Now you can browse and order online — and we'll deliver right to your doorstep.
             </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-1">
-            {[{ v: "15 yrs", l: "In the community" }, { v: "120+", l: "Orders weekly" }].map((s) => (
-              <div key={s.l} className="rounded-2xl border border-[#dcefe2] bg-white p-5">
-                <p className="text-3xl font-extrabold" style={{ color: "#16a34a" }}>{s.v}</p>
-                <p className="text-sm text-[#4c6b57]">{s.l}</p>
-              </div>
-            ))}
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              {[{ v: "15 yrs", l: "In the community" }, { v: "120+", l: "Orders weekly" }].map((s) => (
+                <div key={s.l} className="rounded-2xl border border-[#dcefe2] bg-white p-5">
+                  <p className="text-3xl font-extrabold" style={{ color: "#16a34a" }}>{s.v}</p>
+                  <p className="text-sm text-[#4c6b57]">{s.l}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

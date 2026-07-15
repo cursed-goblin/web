@@ -1,4 +1,8 @@
-import { UtensilsCrossed, Clock, MapPin, Phone, Star, Flame } from "lucide-react"
+import { Clock, MapPin, Phone, Star, Flame } from "lucide-react"
+import heroImg from "../assets/demos/restaurant-hero.png"
+import butterChickenImg from "../assets/demos/restaurant-butterchicken.png"
+import paneerImg from "../assets/demos/restaurant-paneer.png"
+import interiorImg from "../assets/demos/restaurant-interior.png"
 
 const nav = [
   { l: "Menu", h: "#menu" },
@@ -15,6 +19,13 @@ const dishes = [
   { n: "Rogan Josh", d: "Kashmiri lamb curry, aromatic spices", p: "₹420" },
   { n: "Gulab Jamun", d: "Warm milk dumplings in cardamom syrup", p: "₹140" },
 ]
+
+const featured = [
+  { img: butterChickenImg, n: "Butter Chicken", d: "Our most-loved signature" },
+  { img: paneerImg, n: "Paneer Tikka", d: "Straight from the tandoor" },
+]
+
+const gallery = [interiorImg, heroImg, butterChickenImg, paneerImg]
 
 export default function RestaurantDemo() {
   return (
@@ -54,13 +65,31 @@ export default function RestaurantDemo() {
               <a href="#visit" className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold">Reserve</a>
             </div>
           </div>
-          <div className="aspect-square rounded-3xl border border-white/10" style={{ background: "linear-gradient(135deg,#f59e0b,#b91c1c)" }}>
-            <div className="flex h-full flex-col items-center justify-center gap-3 text-center">
-              <UtensilsCrossed className="h-16 w-16 text-white/90" />
-              <p className="text-2xl font-bold text-white">Freshly Tandoor-Grilled</p>
-              <p className="text-white/80">Every day from 12 noon</p>
-            </div>
+          <div className="relative">
+            <div className="absolute -inset-3 -z-10 rounded-[2rem] opacity-60 blur-2xl" style={{ background: "linear-gradient(135deg,#f59e0b,#b91c1c)" }} />
+            <img
+              src={heroImg}
+              alt="Assorted North Indian dishes"
+              className="aspect-[4/3] w-full rounded-3xl border border-white/10 object-cover shadow-2xl"
+              loading="eager"
+            />
           </div>
+        </div>
+      </section>
+
+      {/* Featured dishes with photos */}
+      <section className="mx-auto max-w-5xl px-5 pb-4 pt-2">
+        <div className="grid gap-5 sm:grid-cols-2">
+          {featured.map((f) => (
+            <div key={f.n} className="group relative overflow-hidden rounded-3xl border border-white/10">
+              <img src={f.img} alt={f.n} className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 p-5">
+                <h3 className="text-xl font-bold text-white">{f.n}</h3>
+                <p className="text-sm text-white/80">{f.d}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -83,8 +112,9 @@ export default function RestaurantDemo() {
 
       {/* About */}
       <section id="about" className="bg-[#221a15] py-16">
-        <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-3">
-          <div className="sm:col-span-2">
+        <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-2 sm:items-center">
+          <img src={interiorImg} alt="Spice Route dining room" className="aspect-[4/3] w-full rounded-3xl border border-white/10 object-cover" loading="lazy" />
+          <div>
             <h2 className="text-3xl font-bold">Three generations of taste</h2>
             <p className="mt-4 text-[#c9bba8]">
               Spice Route began as a small family kitchen and grew into one of Jaipur's most-loved
@@ -93,14 +123,14 @@ export default function RestaurantDemo() {
             <p className="mt-3 text-[#c9bba8]">
               Whether it's a quiet dinner or a big celebration, our doors — and our tandoor — are always warm.
             </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-1">
-            {[{ v: "25+", l: "Years serving" }, { v: "4.8★", l: "1,200+ reviews" }].map((s) => (
-              <div key={s.l} className="rounded-2xl border border-white/10 p-5">
-                <p className="text-3xl font-bold" style={{ color: "#f59e0b" }}>{s.v}</p>
-                <p className="text-sm text-[#c9bba8]">{s.l}</p>
-              </div>
-            ))}
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              {[{ v: "25+", l: "Years serving" }, { v: "4.8★", l: "1,200+ reviews" }].map((s) => (
+                <div key={s.l} className="rounded-2xl border border-white/10 p-5">
+                  <p className="text-3xl font-bold" style={{ color: "#f59e0b" }}>{s.v}</p>
+                  <p className="text-sm text-[#c9bba8]">{s.l}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -109,8 +139,14 @@ export default function RestaurantDemo() {
       <section id="gallery" className="mx-auto max-w-5xl px-5 py-16">
         <h2 className="text-center text-3xl font-bold">From our kitchen</h2>
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {["#f59e0b", "#b91c1c", "#d97706", "#92400e", "#c2410c", "#a16207", "#b45309", "#7c2d12"].map((c, i) => (
-            <div key={i} className="aspect-square rounded-xl" style={{ background: `linear-gradient(135deg, ${c}, #1a1512)` }} />
+          {gallery.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt="Spice Route dish"
+              className="aspect-square w-full rounded-xl border border-white/10 object-cover transition-transform duration-500 hover:scale-105"
+              loading="lazy"
+            />
           ))}
         </div>
       </section>

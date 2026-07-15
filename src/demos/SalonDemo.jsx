@@ -1,9 +1,12 @@
-import { Scissors, Clock, MapPin, Phone, Sparkles } from "lucide-react"
+import { Clock, MapPin, Phone, Sparkles } from "lucide-react"
+import interiorImg from "../assets/demos/salon-interior.png"
+import stylingImg from "../assets/demos/salon-styling.png"
+import manicureImg from "../assets/demos/salon-manicure.png"
 
 const nav = [
   { l: "Services", h: "#services" },
   { l: "About", h: "#about" },
-  { l: "Prices", h: "#prices" },
+  { l: "Gallery", h: "#gallery" },
   { l: "Book", h: "#book" },
 ]
 
@@ -14,6 +17,12 @@ const services = [
   { n: "Facial & Glow", d: "Deep-cleanse, hydrate and radiance", p: "₹1,500" },
   { n: "Bridal Package", d: "Hair, make-up and draping", p: "₹8,000" },
   { n: "Manicure & Pedicure", d: "Spa-grade nail & skin care", p: "₹900" },
+]
+
+const gallery = [
+  { img: stylingImg, l: "Hair styling" },
+  { img: manicureImg, l: "Nail care" },
+  { img: interiorImg, l: "Our studio" },
 ]
 
 export default function SalonDemo() {
@@ -55,12 +64,14 @@ export default function SalonDemo() {
               <a href="#services" className="rounded-full border border-[#d8c2ba] px-6 py-3 text-sm font-semibold">View services</a>
             </div>
           </div>
-          <div className="aspect-square rounded-3xl" style={{ background: "linear-gradient(135deg,#b76e79,#8a5a63)" }}>
-            <div className="flex h-full flex-col items-center justify-center gap-3 text-center text-white">
-              <Scissors className="h-16 w-16" />
-              <p className="text-2xl font-bold">Style that suits you</p>
-              <p className="text-white/80">Tue – Sun, by appointment</p>
-            </div>
+          <div className="relative">
+            <div className="absolute -inset-3 -z-10 rounded-[2rem] opacity-40 blur-2xl" style={{ background: "linear-gradient(135deg,#b76e79,#8a5a63)" }} />
+            <img
+              src={interiorImg}
+              alt="Lumière salon interior"
+              className="aspect-[4/3] w-full rounded-3xl border border-[#e7d9d2] object-cover shadow-xl"
+              loading="eager"
+            />
           </div>
         </div>
       </section>
@@ -82,8 +93,9 @@ export default function SalonDemo() {
 
       {/* About */}
       <section id="about" className="bg-white py-16">
-        <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-3">
-          <div className="sm:col-span-2">
+        <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-2 sm:items-center">
+          <img src={stylingImg} alt="Stylist at work" className="aspect-[4/3] w-full rounded-3xl border border-[#e7d9d2] object-cover" loading="lazy" />
+          <div>
             <h2 className="text-3xl font-bold">A studio built around you</h2>
             <p className="mt-4 text-[#6e5c5c]">
               At Lumière we believe beauty should feel effortless. Our stylists take time to
@@ -92,20 +104,34 @@ export default function SalonDemo() {
             <p className="mt-3 text-[#6e5c5c]">
               From everyday trims to bridal glam, we use only premium, skin-friendly products.
             </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-1">
-            {[{ v: "10+", l: "Expert stylists" }, { v: "4.9★", l: "900+ reviews" }].map((s) => (
-              <div key={s.l} className="rounded-2xl border border-[#e7d9d2] p-5">
-                <p className="text-3xl font-bold" style={{ color: "#b76e79" }}>{s.v}</p>
-                <p className="text-sm text-[#6e5c5c]">{s.l}</p>
-              </div>
-            ))}
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              {[{ v: "10+", l: "Expert stylists" }, { v: "4.9★", l: "900+ reviews" }].map((s) => (
+                <div key={s.l} className="rounded-2xl border border-[#e7d9d2] p-5">
+                  <p className="text-3xl font-bold" style={{ color: "#b76e79" }}>{s.v}</p>
+                  <p className="text-sm text-[#6e5c5c]">{s.l}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Prices banner */}
-      <section id="prices" className="mx-auto max-w-5xl px-5 py-16">
+      {/* Gallery */}
+      <section id="gallery" className="mx-auto max-w-5xl px-5 py-16">
+        <h2 className="text-center text-3xl font-bold">A peek inside</h2>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {gallery.map((g) => (
+            <div key={g.l} className="group relative overflow-hidden rounded-2xl border border-[#e7d9d2]">
+              <img src={g.img} alt={g.l} className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <span className="absolute bottom-3 left-4 text-sm font-semibold text-white">{g.l}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Offer banner */}
+      <section className="mx-auto max-w-5xl px-5 pb-16">
         <div className="rounded-3xl p-8 text-center text-white" style={{ background: "linear-gradient(135deg,#b76e79,#8a5a63)" }}>
           <h2 className="text-3xl font-bold">First visit? Enjoy 15% off</h2>
           <p className="mt-2 text-white/85">Mention this offer when you book your first appointment with us.</p>

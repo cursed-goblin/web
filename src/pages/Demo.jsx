@@ -2,7 +2,6 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { ArrowUpRight, ExternalLink } from "lucide-react"
 import PageHeader from "../components/PageHeader.jsx"
-import MockThumb from "../components/MockThumb.jsx"
 import { demoMeta } from "../demos/demoMeta.js"
 
 export default function Demo() {
@@ -28,18 +27,26 @@ export default function Demo() {
               >
                 <Link
                   to={`/demo/${d.slug}`}
-                  className="glass group block h-full rounded-2xl p-3 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-glow-sm"
+                  className="glass group block h-full overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-glow-sm"
                 >
-                  <MockThumb accent={d.accent} accent2={d.accent2} label={d.name} className="aspect-[4/3]" />
-                  <div className="flex items-start justify-between gap-3 px-2 pb-1 pt-4">
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={d.thumb}
+                      alt={`${d.name} website preview`}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 to-transparent" />
+                    <span
+                      className="absolute left-3 top-3 inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold text-white"
+                      style={{ background: d.accent }}
+                    >
+                      {d.type}
+                    </span>
+                  </div>
+                  <div className="flex items-start justify-between gap-3 p-5">
                     <div>
-                      <span
-                        className="inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold"
-                        style={{ background: `${d.accent}22`, color: d.accent }}
-                      >
-                        {d.type}
-                      </span>
-                      <h3 className="mt-2 text-lg font-bold text-white">{d.name}</h3>
+                      <h3 className="text-lg font-bold text-white">{d.name}</h3>
                       <p className="mt-1 text-sm text-slate-400">{d.blurb}</p>
                       <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-400">
                         Open live demo <ExternalLink className="h-3.5 w-3.5" />
