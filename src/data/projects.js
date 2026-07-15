@@ -1,5 +1,17 @@
 // Portfolio projects. Projects with a `demo` slug also have a live demo under
-// /demo/:slug. The rest are case studies with their own detail page.
+// /demo/:slug. Projects with real photography set `thumb` (and optional
+// `gallery`); the rest fall back to a styled CSS mockup thumbnail.
+import restaurantHero from "../assets/demos/restaurant-hero.png"
+import restaurantButter from "../assets/demos/restaurant-butterchicken.png"
+import restaurantPaneer from "../assets/demos/restaurant-paneer.png"
+import restaurantInterior from "../assets/demos/restaurant-interior.png"
+import salonInterior from "../assets/demos/salon-interior.png"
+import salonStyling from "../assets/demos/salon-styling.png"
+import salonManicure from "../assets/demos/salon-manicure.png"
+import retailStorefront from "../assets/demos/retail-storefront.png"
+import retailBasket from "../assets/demos/retail-basket.png"
+import retailShelves from "../assets/demos/retail-shelves.png"
+
 export const projects = [
   {
     slug: "spice-route",
@@ -8,6 +20,8 @@ export const projects = [
     accent: "#f59e0b",
     accent2: "#b91c1c",
     demo: "restaurant",
+    thumb: restaurantHero,
+    gallery: [restaurantHero, restaurantButter, restaurantPaneer, restaurantInterior],
     year: "2025",
     location: "Jaipur",
     oneLiner: "Menu-forward site for a North Indian family restaurant.",
@@ -27,6 +41,8 @@ export const projects = [
     accent: "#b76e79",
     accent2: "#8a5a63",
     demo: "salon",
+    thumb: salonInterior,
+    gallery: [salonInterior, salonStyling, salonManicure],
     year: "2025",
     location: "Bengaluru",
     oneLiner: "Elegant booking site for a hair & beauty studio.",
@@ -46,6 +62,8 @@ export const projects = [
     accent: "#16a34a",
     accent2: "#15803d",
     demo: "retail",
+    thumb: retailStorefront,
+    gallery: [retailStorefront, retailBasket, retailShelves],
     year: "2025",
     location: "Pune",
     oneLiner: "Bright storefront for a neighbourhood grocery.",

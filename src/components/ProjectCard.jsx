@@ -13,15 +13,29 @@ export default function ProjectCard({ project, index = 0 }) {
     >
       <Link
         to={`/portfolio/${project.slug}`}
-        className="glass group block h-full rounded-2xl p-3 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-glow-sm"
+        className="glass group block h-full overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-glow-sm"
       >
-        <MockThumb
-          accent={project.accent}
-          accent2={project.accent2}
-          label={project.name}
-          className="aspect-[4/3]"
-        />
-        <div className="flex items-start justify-between gap-3 px-2 pb-1 pt-4">
+        {project.thumb ? (
+          <div className="relative aspect-[4/3] overflow-hidden">
+            <img
+              src={project.thumb}
+              alt={`${project.name} website preview`}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-900/60 to-transparent" />
+          </div>
+        ) : (
+          <div className="p-3 pb-0">
+            <MockThumb
+              accent={project.accent}
+              accent2={project.accent2}
+              label={project.name}
+              className="aspect-[4/3]"
+            />
+          </div>
+        )}
+        <div className="flex items-start justify-between gap-3 p-5">
           <div>
             <div className="flex items-center gap-2">
               <span

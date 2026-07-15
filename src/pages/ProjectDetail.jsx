@@ -10,6 +10,8 @@ export default function ProjectDetail() {
 
   if (!project) return <Navigate to="/portfolio" replace />
 
+  const gallery = project.gallery && project.gallery.length ? project.gallery : null
+
   return (
     <div className="pt-28 sm:pt-32">
       <div className="mx-auto max-w-5xl px-5">
@@ -54,13 +56,45 @@ export default function ProjectDetail() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-8"
         >
-          <MockThumb
-            accent={project.accent}
-            accent2={project.accent2}
-            label={project.name}
-            className="mx-auto max-w-3xl"
-          />
+          {project.thumb ? (
+            <div className="relative mx-auto max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-glow-sm">
+              <img
+                src={project.thumb}
+                alt={`${project.name} website preview`}
+                className="aspect-[16/10] w-full object-cover"
+                loading="eager"
+              />
+            </div>
+          ) : (
+            <MockThumb
+              accent={project.accent}
+              accent2={project.accent2}
+              label={project.name}
+              className="mx-auto max-w-3xl"
+            />
+          )}
         </motion.div>
+
+        {/* Gallery */}
+        {gallery && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5 }}
+            className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4"
+          >
+            {gallery.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`${project.name} detail ${i + 1}`}
+                className="aspect-square w-full rounded-xl border border-white/10 object-cover transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+              />
+            ))}
+          </motion.div>
+        )}
 
         {/* Body */}
         <div className="mt-12 grid gap-10 lg:grid-cols-3">
