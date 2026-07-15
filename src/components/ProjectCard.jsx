@@ -1,0 +1,47 @@
+import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
+import { ArrowUpRight } from "lucide-react"
+import MockThumb from "./MockThumb.jsx"
+
+export default function ProjectCard({ project, index = 0 }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, delay: (index % 3) * 0.08 }}
+    >
+      <Link
+        to={`/portfolio/${project.slug}`}
+        className="glass group block h-full rounded-2xl p-3 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-glow-sm"
+      >
+        <MockThumb
+          accent={project.accent}
+          accent2={project.accent2}
+          label={project.name}
+          className="aspect-[4/3]"
+        />
+        <div className="flex items-start justify-between gap-3 px-2 pb-1 pt-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <span
+                className="inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold"
+                style={{ background: `${project.accent}22`, color: project.accent }}
+              >
+                {project.category}
+              </span>
+              {project.demo && (
+                <span className="text-[11px] font-medium text-slate-500">Live demo</span>
+              )}
+            </div>
+            <h3 className="mt-2 text-lg font-bold text-white">{project.name}</h3>
+            <p className="mt-1 text-sm text-slate-400">{project.oneLiner}</p>
+          </div>
+          <span className="mt-1 grid h-8 w-8 flex-shrink-0 place-items-center rounded-full border border-white/10 text-slate-300 transition-all duration-300 group-hover:border-accent-400/50 group-hover:bg-accent-500/15 group-hover:text-white">
+            <ArrowUpRight className="h-4 w-4" />
+          </span>
+        </div>
+      </Link>
+    </motion.div>
+  )
+}

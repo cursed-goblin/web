@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { Palette, Globe, Mail, ShieldCheck } from "lucide-react"
+import SectionHeading from "./SectionHeading.jsx"
 
 const features = [
   {
@@ -35,7 +36,7 @@ const item = {
 
 export default function Features() {
   return (
-    <section id="services" className="relative py-20">
+    <section className="relative py-20">
       <div className="mx-auto max-w-6xl px-5">
         <SectionHeading
           eyebrow="Services"
@@ -84,19 +85,5 @@ export default function Features() {
         </motion.div>
       </div>
     </section>
-  )
-}
-
-export function SectionHeading({ eyebrow, title, subtitle }) {
-  return (
-    <div className="mx-auto max-w-2xl text-center">
-      <div className="mb-4 flex items-center justify-center gap-3">
-        <span className="h-px w-8 bg-gradient-to-r from-transparent to-accent-500" />
-        <span className="text-sm font-medium italic text-accent-400">{eyebrow}</span>
-        <span className="h-px w-8 bg-gradient-to-l from-transparent to-accent-500" />
-      </div>
-      <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">{title}</h2>
-      {subtitle && <p className="mt-3 text-slate-400">{subtitle}</p>}
-    </div>
   )
 }

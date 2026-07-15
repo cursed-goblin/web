@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Link } from "react-router-dom"
 import { Plus, HelpCircle } from "lucide-react"
 
 const faqs = [
@@ -77,7 +78,7 @@ export default function Faq() {
   const [open, setOpen] = useState(0)
 
   return (
-    <section id="faq" className="relative py-20 sm:py-28">
+    <section className="relative py-20 sm:py-28">
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-accent-500/10 blur-3xl" />
       </div>
@@ -127,9 +128,9 @@ export default function Faq() {
           <p className="text-sm text-slate-400">
             We're happy to help you get your shop online. Reach out for a free quote.
           </p>
-          <a href="#contact" className="btn-primary mt-2">
+          <Link to="/contact" className="btn-primary mt-2">
             Get Free Quote
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

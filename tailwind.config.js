@@ -28,9 +28,19 @@ export default {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-12px)" },
         },
+        drift: {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1)" },
+          "50%": { transform: "translate3d(30px, -24px, 0) scale(1.08)" },
+        },
+        driftAlt: {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1)" },
+          "50%": { transform: "translate3d(-28px, 22px, 0) scale(1.1)" },
+        },
       },
       animation: {
         float: "float 6s ease-in-out infinite",
+        "drift-slow": "drift 20s ease-in-out infinite",
+        "drift-slower": "driftAlt 28s ease-in-out infinite",
       },
     },
   },

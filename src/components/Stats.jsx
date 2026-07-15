@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 import { ArrowRight } from "lucide-react"
 
 const stats = [
@@ -9,7 +10,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section id="about" className="relative py-12">
+    <section className="relative py-12">
       <div className="mx-auto max-w-6xl px-5">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -27,9 +28,9 @@ export default function Stats() {
             </div>
           ))}
           <div className="col-span-2 flex justify-center sm:col-span-1 sm:justify-end">
-            <a href="#contact" className="btn-primary">
+            <Link to="/contact" className="btn-primary">
               Get Free Quote <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
