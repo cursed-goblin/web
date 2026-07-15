@@ -10,15 +10,17 @@ const nav = [
   { l: "Visit", h: "#visit" },
 ]
 
+const img = (id) => "https://images.pexels.com/photos/" + id + "/pexels-photo-" + id + ".jpeg?auto=compress&cs=tinysrgb&w=600"
+
 const products = [
-  { n: "Fresh Tomatoes", u: "per kg", p: "₹40" },
-  { n: "Farm Eggs", u: "dozen", p: "₹84" },
-  { n: "Toned Milk", u: "1 L", p: "₹54" },
-  { n: "Basmati Rice", u: "5 kg", p: "₹520" },
-  { n: "Fresh Bananas", u: "dozen", p: "₹60" },
-  { n: "Atta (Wheat Flour)", u: "10 kg", p: "₹440" },
-  { n: "Cooking Oil", u: "1 L", p: "₹145" },
-  { n: "Onions", u: "per kg", p: "₹35" },
+  { n: "Fresh Tomatoes", u: "per kg", p: "₹40", img: img(18476614) },
+  { n: "Farm Eggs", u: "dozen", p: "₹84", img: img(12969328) },
+  { n: "Toned Milk", u: "1 L", p: "₹54", img: img(4324359) },
+  { n: "Basmati Rice", u: "5 kg", p: "₹520", img: img(7593253) },
+  { n: "Fresh Bananas", u: "dozen", p: "₹60", img: img(7195356) },
+  { n: "Atta (Wheat Flour)", u: "10 kg", p: "₹440", img: img(17236203) },
+  { n: "Cooking Oil", u: "1 L", p: "₹145", img: img(12284682) },
+  { n: "Onions", u: "per kg", p: "₹35", img: img(4307386) },
 ]
 
 export default function RetailDemo() {
@@ -124,7 +126,7 @@ export default function RetailDemo() {
         <div className="mt-10 grid gap-4 grid-cols-2 sm:grid-cols-4">
           {products.map((p) => (
             <div key={p.n} className="rounded-2xl border border-[#dcefe2] p-4">
-              <div className="mb-3 aspect-square rounded-xl" style={{ background: "linear-gradient(135deg,#bbf7d0,#16a34a)" }} />
+              <img src={p.img} alt={p.n} className="mb-3 aspect-square w-full rounded-xl border border-[#dcefe2] object-cover" loading="lazy" />
               <h3 className="text-sm font-semibold leading-tight">{p.n}</h3>
               <p className="text-xs text-[#4c6b57]">{p.u}</p>
               <div className="mt-2 flex items-center justify-between">

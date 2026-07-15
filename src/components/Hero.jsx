@@ -138,7 +138,7 @@ function Mockup() {
             <div>
               <p className="text-xs text-slate-400">Your Plan</p>
               <h4 className="mt-1 text-lg font-bold text-white">Starter</h4>
-              <p className="text-xs text-slate-400">₹1,999 / year</p>
+              <p className="text-xs text-slate-400">From ₹1,999</p>
               <ul className="mt-3 flex flex-col gap-1.5">
                 {["Free domain", "Custom email", "SSL security"].map((t) => (
                   <li key={t} className="flex items-center gap-1.5 text-xs text-slate-300">

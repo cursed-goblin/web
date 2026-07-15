@@ -5,10 +5,17 @@ import PageHeader from "../components/PageHeader.jsx"
 
 const budgets = ["₹1,999 (Starter)", "₹5,000–10,000", "₹10,000+", "Not sure yet"]
 
+// Where enquiries are delivered. Uses FormSubmit (https://formsubmit.co) so the
+// form works on a static site with no backend. Change this to your real inbox —
+// FormSubmit emails you once to confirm on the very first submission.
+const CONTACT_EMAIL = "hello@sitesprout.in"
+
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", business: "", budget: "", message: "" })
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState("")
 
   const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
 
@@ -21,11 +28,38 @@ export default function Contact() {
     return err
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     const err = validate()
     setErrors(err)
-    if (Object.keys(err).length === 0) setSent(true)
+    if (Object.keys(err).length > 0) return
+
+    setSending(true)
+    setSendError("")
+    try {
+      const endpoint = "https://formsubmit.co/ajax/" + encodeURIComponent(CONTACT_EMAIL)
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          business: form.business || "—",
+          budget: form.budget || "—",
+          message: form.message,
+          _subject: "New website enquiry via SiteSprout",
+          _template: "table",
+        }),
+      })
+      if (!res.ok) throw new Error("Request failed")
+      setSent(true)
+    } catch {
+      setSendError(
+        `Sorry, something went wrong sending your message. Please email us directly at ${CONTACT_EMAIL}.`
+      )
+    } finally {
+      setSending(false)
+    }
   }
 
   const field =
@@ -96,6 +130,7 @@ export default function Contact() {
                 <button
                   onClick={() => {
                     setSent(false)
+                    setSendError("")
                     setForm({ name: "", email: "", business: "", budget: "", message: "" })
                   }}
                   className="btn-ghost mt-6"
@@ -147,8 +182,17 @@ export default function Contact() {
                   />
                   {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
                 </div>
-                <button type="submit" className="btn-primary w-full">
-                  Send message <Send className="h-4 w-4" />
+                {sendError && (
+                  <p className="rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                    {sendError}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {sending ? "Sending…" : "Send message"} <Send className="h-4 w-4" />
                 </button>
               </form>
             )}
