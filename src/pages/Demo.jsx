@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { ArrowUpRight, ExternalLink } from "lucide-react"
 import PageHeader from "../components/PageHeader.jsx"
+import MockThumb from "../components/MockThumb.jsx"
 import { demoMeta } from "../demos/demoMeta.js"
 
 export default function Demo() {
@@ -29,21 +30,33 @@ export default function Demo() {
                   to={`/demo/${d.slug}`}
                   className="glass group block h-full overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-glow-sm"
                 >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <img
-                      src={d.thumb}
-                      alt={`${d.name} website preview`}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 to-transparent" />
-                    <span
-                      className="absolute left-3 top-3 inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold text-white"
-                      style={{ background: d.accent }}
-                    >
-                      {d.type}
-                    </span>
-                  </div>
+                  {d.thumb ? (
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <img
+                        src={d.thumb}
+                        alt={`${d.name} website preview`}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-ink-900/70 to-transparent" />
+                      <span
+                        className="absolute left-3 top-3 inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold text-white"
+                        style={{ background: d.accent }}
+                      >
+                        {d.type}
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="relative p-3 pb-0">
+                      <MockThumb accent={d.accent} accent2={d.accent2} label={d.name} className="aspect-[16/10]" />
+                      <span
+                        className="absolute left-6 top-6 inline-block rounded-full px-2.5 py-0.5 text-[11px] font-semibold text-white"
+                        style={{ background: d.accent }}
+                      >
+                        {d.type}
+                      </span>
+                    </div>
+                  )}
                   <div className="flex items-start justify-between gap-3 p-5">
                     <div>
                       <h3 className="text-lg font-bold text-white">{d.name}</h3>
