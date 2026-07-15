@@ -1,5 +1,13 @@
 import { Dumbbell, Clock, MapPin, Phone, Check, Flame, Zap } from "lucide-react"
 
+// Free-to-use stock photos (Pexels CDN, hotlinked).
+const heroImg = "https://images.pexels.com/photos/38453113/pexels-photo-38453113.jpeg?auto=compress&cs=tinysrgb&w=1400"
+const gallery = [
+  "https://images.pexels.com/photos/31015145/pexels-photo-31015145.jpeg?auto=compress&cs=tinysrgb&w=900",
+  "https://images.pexels.com/photos/20418612/pexels-photo-20418612.jpeg?auto=compress&cs=tinysrgb&w=900",
+  "https://images.pexels.com/photos/35567437/pexels-photo-35567437.jpeg?auto=compress&cs=tinysrgb&w=900",
+]
+
 const nav = [
   { l: "Classes", h: "#classes" },
   { l: "Plans", h: "#plans" },
@@ -31,7 +39,6 @@ const trainers = [
 export default function GymDemo() {
   return (
     <div className="min-h-screen bg-[#0a0f14] font-sans text-slate-100">
-      {/* Nav */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0a0f14]/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <a href="#top" className="flex items-center gap-2 text-xl font-extrabold uppercase tracking-wide">
@@ -49,7 +56,6 @@ export default function GymDemo() {
         </div>
       </header>
 
-      {/* Hero */}
       <section id="top" className="relative overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 70% 10%, rgba(34,211,238,0.22), transparent 70%)" }} />
         <div className="relative mx-auto grid max-w-5xl gap-8 px-5 py-20 sm:grid-cols-2 sm:items-center">
@@ -71,19 +77,21 @@ export default function GymDemo() {
           </div>
           <div className="relative">
             <div className="absolute -inset-3 -z-10 rounded-[2rem] opacity-50 blur-2xl" style={{ background: "linear-gradient(135deg,#22d3ee,#0891b2)" }} />
-            <div className="grid aspect-[4/3] w-full grid-cols-2 gap-3 rounded-3xl border border-white/10 bg-white/5 p-4">
-              {[{ v: "1,200+", l: "Members" }, { v: "25", l: "Classes / wk" }, { v: "8", l: "Expert coaches" }, { v: "24/7", l: "Access" }].map((s) => (
-                <div key={s.l} className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-[#0a0f14]/60">
-                  <p className="text-3xl font-extrabold" style={{ color: "#22d3ee" }}>{s.v}</p>
-                  <p className="text-xs uppercase tracking-widest text-slate-400">{s.l}</p>
-                </div>
-              ))}
-            </div>
+            <img src={heroImg} alt="Athlete training in a dark modern gym" className="aspect-[4/3] w-full rounded-3xl border border-white/10 object-cover shadow-2xl" loading="eager" />
+          </div>
+        </div>
+        <div className="mx-auto -mt-6 max-w-5xl px-5 pb-6">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[{ v: "1,200+", l: "Members" }, { v: "25", l: "Classes / wk" }, { v: "8", l: "Expert coaches" }, { v: "24/7", l: "Access" }].map((s) => (
+              <div key={s.l} className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/5 py-4">
+                <p className="text-2xl font-extrabold" style={{ color: "#22d3ee" }}>{s.v}</p>
+                <p className="text-xs uppercase tracking-widest text-slate-400">{s.l}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Classes */}
       <section id="classes" className="mx-auto max-w-5xl px-5 py-16">
         <h2 className="text-center text-3xl font-extrabold uppercase sm:text-4xl">Weekly Schedule</h2>
         <p className="mt-2 text-center text-slate-400">Morning sessions to kickstart your day.</p>
@@ -100,17 +108,21 @@ export default function GymDemo() {
         </div>
       </section>
 
-      {/* Plans */}
+      <section className="mx-auto max-w-5xl px-5 pb-4">
+        <div className="grid grid-cols-3 gap-3">
+          {gallery.map((src, i) => (
+            <img key={i} src={src} alt="FitCore gym" className="aspect-square w-full rounded-xl border border-white/10 object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
+          ))}
+        </div>
+      </section>
+
       <section id="plans" className="bg-[#0d141b] py-16">
         <div className="mx-auto max-w-5xl px-5">
           <h2 className="text-center text-3xl font-extrabold uppercase sm:text-4xl">Membership Plans</h2>
           <p className="mt-2 text-center text-slate-400">No joining fee. Cancel anytime.</p>
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
             {plans.map((pl) => (
-              <div
-                key={pl.n}
-                className={`rounded-3xl border p-7 ${pl.hot ? "border-[#22d3ee] bg-white/5" : "border-white/10"}`}
-              >
+              <div key={pl.n} className={`rounded-3xl border p-7 ${pl.hot ? "border-[#22d3ee] bg-white/5" : "border-white/10"}`}>
                 {pl.hot && (
                   <span className="mb-3 inline-flex items-center gap-1 rounded-full px-3 py-0.5 text-xs font-bold text-[#0a0f14]" style={{ background: "#22d3ee" }}>
                     <Flame className="h-3 w-3" /> Most popular
@@ -134,7 +146,6 @@ export default function GymDemo() {
         </div>
       </section>
 
-      {/* Trainers */}
       <section id="trainers" className="mx-auto max-w-5xl px-5 py-16">
         <h2 className="text-center text-3xl font-extrabold uppercase">Meet the coaches</h2>
         <div className="mt-10 grid gap-5 sm:grid-cols-3">
@@ -152,7 +163,6 @@ export default function GymDemo() {
         </div>
       </section>
 
-      {/* Join */}
       <section id="join" className="bg-[#0d141b] py-16">
         <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-2">
           <div>

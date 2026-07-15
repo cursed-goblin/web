@@ -1,5 +1,11 @@
 import { Coffee, Clock, MapPin, Phone, Star } from "lucide-react"
 
+// Free-to-use stock photos (Pexels CDN, hotlinked).
+const chaiImg = "https://images.pexels.com/photos/5946623/pexels-photo-5946623.jpeg?auto=compress&cs=tinysrgb&w=1400"
+const interiorImg = "https://images.pexels.com/photos/28947779/pexels-photo-28947779.jpeg?auto=compress&cs=tinysrgb&w=1400"
+const clayCupsImg = "https://images.pexels.com/photos/11413997/pexels-photo-11413997.jpeg?auto=compress&cs=tinysrgb&w=900"
+const glassImg = "https://images.pexels.com/photos/36326292/pexels-photo-36326292.jpeg?auto=compress&cs=tinysrgb&w=900"
+
 const nav = [
   { l: "Menu", h: "#menu" },
   { l: "Specials", h: "#specials" },
@@ -31,7 +37,6 @@ const specials = [
 export default function CafeDemo() {
   return (
     <div className="min-h-screen bg-[#20160f] font-serif text-[#f3e7d8]">
-      {/* Nav */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-[#20160f]/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <a href="#top" className="flex items-center gap-2 text-xl font-bold">
@@ -49,7 +54,6 @@ export default function CafeDemo() {
         </div>
       </header>
 
-      {/* Hero */}
       <section id="top" className="relative overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 70% 15%, rgba(217,119,6,0.22), transparent 70%)" }} />
         <div className="relative mx-auto grid max-w-5xl gap-8 px-5 py-20 sm:grid-cols-2 sm:items-center">
@@ -69,14 +73,11 @@ export default function CafeDemo() {
           </div>
           <div className="relative">
             <div className="absolute -inset-3 -z-10 rounded-[2rem] opacity-50 blur-2xl" style={{ background: "linear-gradient(135deg,#d97706,#92400e)" }} />
-            <div className="flex aspect-[4/3] w-full items-center justify-center rounded-3xl border border-white/10" style={{ background: "linear-gradient(135deg,#d97706,#92400e)" }}>
-              <Coffee className="h-20 w-20 text-[#20160f]/60" />
-            </div>
+            <img src={chaiImg} alt="A cup of masala chai" className="aspect-[4/3] w-full rounded-3xl border border-white/10 object-cover shadow-2xl" loading="eager" />
           </div>
         </div>
       </section>
 
-      {/* Menu */}
       <section id="menu" className="mx-auto max-w-5xl px-5 py-16">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">Our Menu</h2>
         <p className="mt-2 text-center text-[#c8b49c]">Freshly made, all day long.</p>
@@ -97,7 +98,14 @@ export default function CafeDemo() {
         </div>
       </section>
 
-      {/* Specials */}
+      <section className="mx-auto max-w-5xl px-5 pb-4">
+        <div className="grid grid-cols-3 gap-3">
+          {[clayCupsImg, glassImg, interiorImg].map((src, i) => (
+            <img key={i} src={src} alt="Chai Point café" className="aspect-square w-full rounded-xl border border-white/10 object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
+          ))}
+        </div>
+      </section>
+
       <section id="specials" className="bg-[#2a1e14] py-16">
         <div className="mx-auto max-w-5xl px-5">
           <h2 className="text-center text-3xl font-bold">Daily specials</h2>
@@ -113,12 +121,9 @@ export default function CafeDemo() {
         </div>
       </section>
 
-      {/* About */}
       <section id="about" className="mx-auto max-w-5xl px-5 py-16">
         <div className="grid gap-8 sm:grid-cols-2 sm:items-center">
-          <div className="flex aspect-[4/3] items-center justify-center rounded-3xl" style={{ background: "linear-gradient(135deg,#d97706,#92400e)" }}>
-            <Coffee className="h-16 w-16 text-white/70" />
-          </div>
+          <img src={interiorImg} alt="Chai Point café interior" className="aspect-[4/3] w-full rounded-3xl border border-white/10 object-cover" loading="lazy" />
           <div>
             <h2 className="text-3xl font-bold">A neighbourhood favourite</h2>
             <p className="mt-4 text-[#c8b49c]">
@@ -136,7 +141,6 @@ export default function CafeDemo() {
         </div>
       </section>
 
-      {/* Visit */}
       <section id="visit" className="bg-[#2a1e14] py-16">
         <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-2">
           <div>

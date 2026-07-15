@@ -1,4 +1,10 @@
-import { Flower2, Clock, MapPin, Phone, Truck, Heart } from "lucide-react"
+import { Flower2, Clock, MapPin, Phone, Truck } from "lucide-react"
+
+// Free-to-use stock photos (Pexels CDN, hotlinked).
+const shopImg = "https://images.pexels.com/photos/21835295/pexels-photo-21835295.jpeg?auto=compress&cs=tinysrgb&w=1400"
+const bImgPink = "https://images.pexels.com/photos/38323759/pexels-photo-38323759.jpeg?auto=compress&cs=tinysrgb&w=900"
+const bImgRoses = "https://images.pexels.com/photos/20416142/pexels-photo-20416142.jpeg?auto=compress&cs=tinysrgb&w=900"
+const bImgKraft = "https://images.pexels.com/photos/23331187/pexels-photo-23331187.jpeg?auto=compress&cs=tinysrgb&w=900"
 
 const nav = [
   { l: "Shop", h: "#shop" },
@@ -8,12 +14,12 @@ const nav = [
 ]
 
 const bouquets = [
-  { n: "Rose Romance", d: "12 red roses, baby's breath", p: "₹899", g: ["#fda4af", "#be185d"] },
-  { n: "Sunny Day", d: "Sunflowers & yellow tulips", p: "₹749", g: ["#fde68a", "#f59e0b"] },
-  { n: "Pastel Dream", d: "Mixed pastel seasonal blooms", p: "₹999", g: ["#f5d0fe", "#c084fc"] },
-  { n: "Pure White", d: "Lilies & white roses", p: "₹1,199", g: ["#f8fafc", "#cbd5e1"] },
-  { n: "Tropical Pop", d: "Birds of paradise & orchids", p: "₹1,349", g: ["#fecaca", "#f472b6"] },
-  { n: "Garden Fresh", d: "Seasonal wildflower mix", p: "₹649", g: ["#bbf7d0", "#ec4899"] },
+  { n: "Rose Romance", d: "12 red roses, baby's breath", p: "₹899", img: bImgRoses },
+  { n: "Pink Blush", d: "Soft pink roses, wrapped", p: "₹749", img: bImgPink },
+  { n: "Kraft Classic", d: "Seasonal blooms in kraft paper", p: "₹999", img: bImgKraft },
+  { n: "Pure White", d: "Lilies & white roses", p: "₹1,199", img: bImgPink },
+  { n: "Garden Fresh", d: "Seasonal wildflower mix", p: "₹649", img: bImgRoses },
+  { n: "Celebration", d: "Bright mixed bouquet", p: "₹1,349", img: bImgKraft },
 ]
 
 const occasions = ["Birthday", "Anniversary", "Congratulations", "Get Well", "Sympathy", "Just Because"]
@@ -21,7 +27,6 @@ const occasions = ["Birthday", "Anniversary", "Congratulations", "Get Well", "Sy
 export default function FloristDemo() {
   return (
     <div className="min-h-screen bg-[#fdf4f7] font-serif text-[#4a2f39]">
-      {/* Nav */}
       <header className="sticky top-0 z-40 border-b border-[#f3d9e2] bg-[#fdf4f7]/90 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-4">
           <a href="#top" className="flex items-center gap-2 text-xl font-bold tracking-wide">
@@ -39,7 +44,6 @@ export default function FloristDemo() {
         </div>
       </header>
 
-      {/* Hero */}
       <section id="top" className="relative overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(55% 55% at 30% 15%, rgba(236,72,153,0.16), transparent 70%)" }} />
         <div className="relative mx-auto grid max-w-5xl gap-8 px-5 py-20 sm:grid-cols-2 sm:items-center">
@@ -60,25 +64,18 @@ export default function FloristDemo() {
           </div>
           <div className="relative">
             <div className="absolute -inset-3 -z-10 rounded-[2rem] opacity-40 blur-2xl" style={{ background: "linear-gradient(135deg,#ec4899,#be185d)" }} />
-            <div className="grid aspect-[4/3] w-full grid-cols-2 gap-3 rounded-3xl border border-[#f3d9e2] bg-white p-4">
-              {bouquets.slice(0, 4).map((b) => (
-                <div key={b.n} className="flex items-end rounded-2xl p-3" style={{ background: `linear-gradient(135deg, ${b.g[0]}, ${b.g[1]})` }}>
-                  <span className="rounded bg-white/70 px-2 py-0.5 text-[10px] font-semibold text-[#4a2f39]">{b.n}</span>
-                </div>
-              ))}
-            </div>
+            <img src={shopImg} alt="Bloom & Co. flower shop full of bouquets" className="aspect-[4/3] w-full rounded-3xl border border-[#f3d9e2] object-cover shadow-xl" loading="eager" />
           </div>
         </div>
       </section>
 
-      {/* Shop */}
       <section id="shop" className="mx-auto max-w-5xl px-5 py-16">
         <h2 className="text-center text-3xl font-bold sm:text-4xl">Our Bouquets</h2>
         <p className="mt-2 text-center text-[#7c5c67]">Handcrafted with the freshest seasonal blooms.</p>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {bouquets.map((b) => (
             <div key={b.n} className="overflow-hidden rounded-3xl border border-[#f3d9e2] bg-white">
-              <div className="h-44" style={{ background: `linear-gradient(135deg, ${b.g[0]}, ${b.g[1]})` }} />
+              <img src={b.img} alt={b.n} className="h-48 w-full object-cover" loading="lazy" />
               <div className="p-5">
                 <h3 className="text-lg font-semibold">{b.n}</h3>
                 <p className="mt-1 text-sm text-[#7c5c67]">{b.d}</p>
@@ -92,7 +89,6 @@ export default function FloristDemo() {
         </div>
       </section>
 
-      {/* Occasions */}
       <section id="occasions" className="bg-white py-16">
         <div className="mx-auto max-w-5xl px-5">
           <h2 className="text-center text-3xl font-bold">Shop by occasion</h2>
@@ -106,12 +102,9 @@ export default function FloristDemo() {
         </div>
       </section>
 
-      {/* About */}
       <section id="about" className="mx-auto max-w-5xl px-5 py-16">
         <div className="grid gap-8 sm:grid-cols-2 sm:items-center">
-          <div className="flex aspect-[4/3] items-center justify-center rounded-3xl" style={{ background: "linear-gradient(135deg,#fda4af,#be185d)" }}>
-            <Heart className="h-16 w-16 text-white/80" />
-          </div>
+          <img src={bImgKraft} alt="Hand-tied bouquet" className="aspect-[4/3] w-full rounded-3xl border border-[#f3d9e2] object-cover" loading="lazy" />
           <div>
             <h2 className="text-3xl font-bold">A little studio full of blooms</h2>
             <p className="mt-4 text-[#7c5c67]">
@@ -125,7 +118,6 @@ export default function FloristDemo() {
         </div>
       </section>
 
-      {/* Order */}
       <section id="order" className="bg-white py-16">
         <div className="mx-auto grid max-w-5xl gap-8 px-5 sm:grid-cols-2">
           <div>

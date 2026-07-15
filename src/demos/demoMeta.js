@@ -39,7 +39,7 @@ export const demoMeta = [
     type: "Fitness",
     accent: "#22d3ee",
     accent2: "#0891b2",
-    thumb: null,
+    thumb: "https://images.pexels.com/photos/38453113/pexels-photo-38453113.jpeg?auto=compress&cs=tinysrgb&w=1200",
     blurb: "A bold, high-energy site with class schedule and membership plans.",
   },
   {
@@ -48,7 +48,7 @@ export const demoMeta = [
     type: "Florist",
     accent: "#ec4899",
     accent2: "#be185d",
-    thumb: null,
+    thumb: "https://images.pexels.com/photos/21835295/pexels-photo-21835295.jpeg?auto=compress&cs=tinysrgb&w=1200",
     blurb: "A soft, photographic bouquet shop with same-day delivery orders.",
   },
   {
@@ -57,7 +57,7 @@ export const demoMeta = [
     type: "Café",
     accent: "#d97706",
     accent2: "#92400e",
-    thumb: null,
+    thumb: "https://images.pexels.com/photos/5946623/pexels-photo-5946623.jpeg?auto=compress&cs=tinysrgb&w=1200",
     blurb: "A cosy café site with a full menu board and daily specials.",
   },
 ]
