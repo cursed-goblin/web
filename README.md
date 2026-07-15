@@ -62,9 +62,34 @@ sitesprout/
 - **Stats:** edit the `stats` array in `Stats.jsx`.
 - **Images:** swap the CSS gradient/mockup placeholders in `Hero.jsx` for real photography when available.
 
-## ☁️ Deploy
+## ☁️ Deploy to GitHub Pages
 
-The production build in `dist/` is fully static and can be hosted on Vercel, Netlify, GitHub Pages, or any static host.
+This project is configured to work on GitHub Pages **project sub-paths** (e.g. `https://<user>.github.io/web/`). Two things make that work:
+
+1. `base: "./"` in `vite.config.js` — makes all asset links relative, so the JS/CSS load correctly under `/web/` instead of 404-ing at the domain root (the usual cause of a blank page).
+2. A ready-made GitHub Actions workflow at `.github/workflows/deploy.yml` that builds the app and publishes `dist/` automatically.
+
+### One-time setup
+
+1. Push this project to your repo's `main` branch.
+2. On GitHub: **Settings → Pages → Build and deployment → Source = “GitHub Actions”**.
+3. Every push to `main` now builds and deploys automatically. Your site will be live at `https://<user>.github.io/<repo>/`.
+
+> ⚠️ Do **not** set Pages to serve from the branch root — GitHub would then serve the raw source `index.html` (which references `/src/main.jsx`) and show a blank page. It must serve the built `dist/` output, which the workflow handles.
+
+### Manual deploy (alternative)
+
+```bash
+npm install
+npm run build      # outputs to dist/
+npx gh-pages -d dist   # publishes dist/ to the gh-pages branch
+```
+
+Then set **Settings → Pages → Source = gh-pages branch / root**.
+
+### Other hosts
+
+The `dist/` build is fully static and also works on Vercel, Netlify, or any static host (there `base: "./"` is harmless).
 
 ## 📤 Push to GitHub
 
