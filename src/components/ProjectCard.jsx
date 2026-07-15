@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { ArrowUpRight } from "lucide-react"
 import MockThumb from "./MockThumb.jsx"
+import SitePreview from "./SitePreview.jsx"
 
 export default function ProjectCard({ project, index = 0 }) {
   return (
@@ -15,7 +16,18 @@ export default function ProjectCard({ project, index = 0 }) {
         to={`/portfolio/${project.slug}`}
         className="glass group block h-full overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:shadow-glow-sm"
       >
-        {project.thumb ? (
+        {project.demo ? (
+          <div className="p-3 pb-0">
+            <SitePreview
+              demo={project.demo}
+              accent={project.accent}
+              accent2={project.accent2}
+              heroImg={project.thumb}
+              brand={project.name}
+              className="aspect-[4/3]"
+            />
+          </div>
+        ) : project.thumb ? (
           <div className="relative aspect-[4/3] overflow-hidden">
             <img
               src={project.thumb}

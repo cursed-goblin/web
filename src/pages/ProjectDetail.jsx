@@ -3,6 +3,7 @@ import { Link, useParams, Navigate } from "react-router-dom"
 import { ArrowLeft, ArrowRight, Check, ExternalLink, MapPin, Calendar } from "lucide-react"
 import { getProject } from "../data/projects.js"
 import MockThumb from "../components/MockThumb.jsx"
+import SitePreview from "../components/SitePreview.jsx"
 
 export default function ProjectDetail() {
   const { slug } = useParams()
@@ -56,7 +57,17 @@ export default function ProjectDetail() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-8"
         >
-          {project.thumb ? (
+          {project.demo ? (
+            <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl shadow-glow-sm">
+              <SitePreview
+                demo={project.demo}
+                accent={project.accent}
+                accent2={project.accent2}
+                heroImg={project.thumb}
+                brand={project.name}
+              />
+            </div>
+          ) : project.thumb ? (
             <div className="relative mx-auto max-w-3xl overflow-hidden rounded-2xl border border-white/10 shadow-glow-sm">
               <img
                 src={project.thumb}
